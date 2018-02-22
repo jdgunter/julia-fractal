@@ -12,9 +12,9 @@
 #include <png++/png.hpp>
 
 // defining a few constants
-#define MAX_ITERATIONS 500
-#define XPIXELS 3840
-#define YPIXELS 2160
+#define MAX_ITERATIONS 2000
+#define XPIXELS 1920
+#define YPIXELS 1080
 
 typedef std::complex<double> complex;
 
@@ -211,7 +211,7 @@ int main(int argc, char *argv[])
     // computing C -> pixel mapping
     double im_start = origin_y + 1.08/zoom;
     double re_start = origin_x - 1.92/zoom;
-    double delta_y = 2*std::abs(im_start) / YPIXELS, delta_x = 2*std::abs(re_start) / XPIXELS;
+    double delta_y = 2*1.08/zoom / YPIXELS, delta_x = 2*1.92/zoom / XPIXELS;
     double im, re;
 
     if (verbose) {
@@ -224,9 +224,12 @@ int main(int argc, char *argv[])
     // another thing that would be nice to add is allow the user to input a file
     // consisting of RGB triples to set up the color palette with
     std::vector<Vec3> colors;
-    colors.push_back(Vec3(9, 15, 113));
-    colors.push_back(Vec3(233, 221, 236));
-    colors.push_back(Vec3(242, 164, 58));  
+    colors.push_back(Vec3(0, 0, 0));
+    colors.push_back(Vec3(213, 67, 31));
+    colors.push_back(Vec3(251, 255, 121));  
+    colors.push_back(Vec3(62, 223, 89));
+    colors.push_back(Vec3(43, 30, 218));
+    colors.push_back(Vec3(0, 255, 247));
     
     std::vector<Vec3> palette = linear_interpolated_gradient(colors, 100);
     png::image<png::rgb_pixel> image(XPIXELS, YPIXELS);
